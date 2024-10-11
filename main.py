@@ -1,22 +1,14 @@
 from selenium import webdriver
-
 from selenium.webdriver.chrome.options import Options
-
 from selenium.webdriver.chrome.service import Service
-
 from selenium.webdriver.common.by import By
-
 from selenium.webdriver.support.ui import WebDriverWait
-
 from selenium.webdriver.support import expected_conditions as EC
-
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-
 from webdriver_manager.chrome import ChromeDriverManager
-
 import json
-
 from bson.json_util import dumps
+import pandas as pd
 
  
 
@@ -190,14 +182,11 @@ def valid(gst):
 
         return {"gst_val": "invalid"}
 
- 
+# Store GST data into Excel
+def store_to_excel(data):
+    df = pd.DataFrame([data])  # Create DataFrame from the data
+    df.to_excel('gst_data.xlsx', index=False)  # Save DataFrame to an Excel file
 
- 
-
-# Example GST number
-
- 
-
-a = valid("27AHCPD8893P2ZJ")
-
+a = valid("27AHCPD8893P2ZJ") #exmple GST number
+store_to_excel(a)
 print(a)
